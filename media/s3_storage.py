@@ -9,4 +9,8 @@ class S3MediaStorage:
     bucket.put_object(Key=path, Body=file_to_be_uploaded)
   
   def contains(self, path):
-    return False
+    try:   
+      self.s3.Object(self.bucket_name, path).load()
+      return True
+    except:
+      return False
